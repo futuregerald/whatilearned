@@ -1,0 +1,37 @@
+body {
+    font-family: "Roboto"
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-gap: 20px;
+}
+
+.center-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    justify-items: center;
+}
+
+.TextInput {
+    width: 100%
+}
+
+.input-cell {
+    width: 100%
+}
+
+.card-cell {
+    display: grid;
+    grid-template-columns: .95fr;
+    width: 100%
+}
+
+.card-cell-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    grid-gap: 20px;
+}
