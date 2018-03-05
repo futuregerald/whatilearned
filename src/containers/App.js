@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../css/app.css';
 import 'typeface-roboto'
-import {TextField, Card, CardContent} from 'material-ui'
+import {TextField, Card, CardContent, AppBar, Toolbar, Typography} from 'material-ui'
 
 const styles = {
   root: {
@@ -21,7 +21,13 @@ class App extends Component {
   render() {
     return (
       <div>
-
+      <AppBar position="static" color="default">
+      <Toolbar>
+        <Typography variant="title" color="inherit">
+          What I Learned, Today
+        </Typography>
+      </Toolbar>
+    </AppBar>
       <div className="container">
       <div></div>
       <div className="center-container">
