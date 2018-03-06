@@ -51,7 +51,7 @@ class App extends Component {
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="title" color="inherit">
-              What I Learned, Today
+              What I Learned Today
             </Typography>
           </Toolbar>
         </AppBar>
