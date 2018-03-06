@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
 import { TextField, Card, CardContent, AppBar, Toolbar, Typography } from 'material-ui';
+import { createMuiTheme } from 'material-ui/styles';
 import styled from 'styled-components';
+
+const OuterBody = styled.div`
+  font-family: 'Roboto';
+`;
 
 const BodyContainer = styled.div`
   display: grid;
@@ -9,7 +14,7 @@ const BodyContainer = styled.div`
   grid-gap: 20px;
   margin-top: 10px;
   @media (min-width: 1100px) {
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 4fr 1fr;
   }
 `;
 
@@ -24,9 +29,18 @@ const CenterContainer = styled.div`
 `;
 
 const StyledCard = styled(Card)`
-  display: grid;
-  grid-template-columns: 0.9fr;
-  width: 100%;
+  && {
+    display: grid;
+    grid-template-columns: 0.9fr;
+    width: 100%;
+    background-color: #81d4fa;
+  }
+`;
+
+const StyledCardHeader = StyledCard.extend`
+  && {
+    background-color: #1565c0;
+  }
 `;
 const StyledCardContent = styled(CardContent)`
   display: grid;
@@ -38,6 +52,27 @@ const StyledCardContent = styled(CardContent)`
   }
 `;
 
+const H3 = styled.h3`
+  color: white;
+`;
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
+
 class App extends Component {
   constructor() {
     super();
@@ -47,7 +82,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <OuterBody>
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="title" color="inherit">
@@ -58,6 +93,11 @@ class App extends Component {
         <BodyContainer>
           <div />
           <CenterContainer>
+            <StyledCardHeader>
+              <StyledCardContent>
+                <H3>Today</H3>
+              </StyledCardContent>
+            </StyledCardHeader>
             <StyledCard>
               <StyledCardContent>
                 <TextField id="1" label="I learned..." helperText="Example: CSS grid" fullWidth />
@@ -85,7 +125,7 @@ class App extends Component {
           </CenterContainer>
           <div />
         </BodyContainer>
-      </div>
+      </OuterBody>
     );
   }
 }
