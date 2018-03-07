@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 import {
     BrowserRouter as Router,
-    Route,
-    Link
+    Route
   } from 'react-router-dom'
 
   const PrimaryRoute = ()=>(

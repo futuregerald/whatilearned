@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
-import { TextField, Card, CardContent, AppBar, Toolbar, Typography } from 'material-ui';
-import { createMuiTheme } from 'material-ui/styles';
+import { Card, CardContent, AppBar, Toolbar, Typography } from 'material-ui';
 import styled from 'styled-components';
+import InputCard from '../components/Input-card'
 
 const OuterBody = styled.div`
   font-family: 'Roboto';
@@ -28,20 +28,15 @@ const CenterContainer = styled.div`
   }
 `;
 
-const StyledCard = styled(Card)`
+const StyledCardHeader = styled(Card)`
   && {
     display: grid;
     grid-template-columns: 0.9fr;
     width: 100%;
-    background-color: #81d4fa;
-  }
-`;
-
-const StyledCardHeader = StyledCard.extend`
-  && {
     background-color: #1565c0;
   }
 `;
+
 const StyledCardContent = styled(CardContent)`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -56,33 +51,62 @@ const H3 = styled.h3`
   color: white;
 `;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
-    },
-    secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
-    },
-  },
-});
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       loggedIn: false,
+      checkins: {
+        1 : {
+          id: 1,
+          lesson: "",
+          from: "",
+        },
+        2 : {
+          id: 2,
+          lesson: "",
+          from: "",
+        }
+      }
+      
     };
   }
+  
   render() {
+
+    const lessonOnChangeHandler = (id,e)=>{
+
+      const {from, lesson} = this.state.checkins[id]
+      if (e.target.name === "lesson"){
+        return this.setState({checkins: {...this.state.checkins, [id]: {lesson: e.target.value , from}}})
+       } else {
+        return this.setState({checkins: {...this.state.checkins, [id]: {from: e.target.value , lesson}}}) 
+       }
+    }
+
+    const inputs = Object.keys(this.state.checkins).map((k)=>{
+      const c = this.state.checkins[k]
+      if (c.id === 1){
+        return <InputCard 
+          key={k} 
+          lesson={c.lesson} 
+          from={c.from} 
+          id={k} 
+          onChange={lessonOnChangeHandler} 
+          lessonPlaceholder={"Example: CSS Grid"}
+          fromPlaceholder={"Example: Wes Bos"}
+          />
+      } else {
+      return <InputCard key={k} lesson={c.lesson} from={c.from} id={k} onChange={lessonOnChangeHandler} />
+      }
+    })
+
+    
+
     return (
       <OuterBody>
+      {console.log(this.state)}
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="title" color="inherit">
@@ -95,33 +119,11 @@ class App extends Component {
           <CenterContainer>
             <StyledCardHeader>
               <StyledCardContent>
-                <H3>Today</H3>
+                <H3>Today...</H3>
               </StyledCardContent>
             </StyledCardHeader>
-            <StyledCard>
-              <StyledCardContent>
-                <TextField id="1" label="I learned..." helperText="Example: CSS grid" fullWidth />
-
-                <TextField fullWidth id="1" label="From..." helperText="Example: Wes Bos" />
-              </StyledCardContent>
-            </StyledCard>
-            <StyledCard>
-              <StyledCardContent>
-                <TextField id="1" label="I learned..." helperText="Example: React" fullWidth />
-                <TextField fullWidth id="1" label="From..." helperText="Example:  https://www.udemy.com/react-redux/" />
-              </StyledCardContent>
-            </StyledCard>
-            <StyledCard>
-              <StyledCardContent>
-                <TextField id="1" label="I learned..." helperText="Example: Node" fullWidth />
-                <TextField
-                  fullWidth
-                  id="1"
-                  label="From..."
-                  helperText="Example: https://medium.com/the-node-js-collection/tagged/tutorial"
-                />
-              </StyledCardContent>
-            </StyledCard>
+            
+            {inputs}
           </CenterContainer>
           <div />
         </BodyContainer>
