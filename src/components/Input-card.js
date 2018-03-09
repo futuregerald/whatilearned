@@ -23,7 +23,7 @@ const StyledButton = styled(Button)`
 
 const StyledCardContent = styled(CardContent)`
   display: grid;
-  grid-template-columns: 12fr 15fr 1fr;
+  grid-template-columns: 15fr 10fr 1fr;
   width: 100%;
   grid-gap: 20px;
   @media (max-width: 700px) {

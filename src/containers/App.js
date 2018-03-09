@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
 import { Card, CardContent, Toolbar, Typography, Button } from 'material-ui';
+import Animate from 'react-simple-animate';
 import AddIcon from 'material-ui-icons/Add';
 import styled , {injectGlobal} from 'styled-components';
 import InputCard from '../components/Input-card'
+
+import logo from '../images/logo2.svg'
+
 
 injectGlobal`
 
@@ -76,6 +80,10 @@ const StyledCardContent = styled(CardContent)`
 const H3 = styled.h3`
   color: white;
 `;
+
+const StyledLogo = styled.img`
+  width: 20rem;
+`
 
 
 class App extends Component {
@@ -154,9 +162,8 @@ class App extends Component {
       {console.log(this.state)}
         <StyledAppBar >
           <Toolbar>
-            <Typography variant="title" color="inherit">
-              What I Learned Today
-            </Typography>
+            
+            <StyledLogo src={logo} alt=""/>
           </Toolbar>
         </StyledAppBar>
         <BodyContainer>
