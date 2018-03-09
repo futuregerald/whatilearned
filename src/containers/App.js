@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
-import { Card, CardContent, AppBar, Toolbar, Typography } from 'material-ui';
+import { Card, CardContent, AppBar, Toolbar, Typography, Button } from 'material-ui';
+import AddIcon from 'material-ui-icons/Add';
 import styled from 'styled-components';
 import InputCard from '../components/Input-card'
 
@@ -34,6 +35,22 @@ const StyledCardHeader = styled(Card)`
     grid-template-columns: 0.9fr;
     width: 100%;
     background-color: #1565c0;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  && {
+    background-color: #E34304;
+    justify-self: end
+    top: 3rem
+  }
+`;
+
+const StyledAppBar = styled.div`
+  && {
+    width: 100%;
+    padding: 0;
+    
   }
 `;
 
@@ -107,19 +124,22 @@ class App extends Component {
     return (
       <OuterBody>
       {console.log(this.state)}
-        <AppBar position="static" color="default">
+        <StyledAppBar >
           <Toolbar>
             <Typography variant="title" color="inherit">
               What I Learned Today
             </Typography>
           </Toolbar>
-        </AppBar>
+        </StyledAppBar>
         <BodyContainer>
           <div />
           <CenterContainer>
             <StyledCardHeader>
               <StyledCardContent>
                 <H3>Today...</H3>
+                <StyledButton variant="fab" aria-label="add" >
+                 <AddIcon />
+                </StyledButton>
               </StyledCardContent>
             </StyledCardHeader>
             
