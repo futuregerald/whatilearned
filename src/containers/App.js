@@ -105,7 +105,8 @@ class App extends Component {
       let unique = true
       let elements = Object.keys(this.state.checkins)
       elements.sort((a, b)=>{return a - b});
-      const newElement = elements[elements.length-1]
+      console.log(elements)
+      const newElement = parseInt(elements[elements.length-1])
       console.log(newElement)
        this.setState({checkins: {...this.state.checkins,[newElement+1]: {
         id: newElement+1,
