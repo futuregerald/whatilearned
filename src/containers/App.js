@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import 'typeface-roboto';
 import { Card, CardContent, Toolbar, Typography, Button } from 'material-ui';
 import AddIcon from 'material-ui-icons/Add';
-import styled from 'styled-components';
+import styled , {injectGlobal} from 'styled-components';
 import InputCard from '../components/Input-card'
+
+injectGlobal`
+
+  body {
+    background-color: #BDC3E7;
+  }
+`;
 
 const OuterBody = styled.div`
   font-family: 'Roboto';
@@ -50,7 +57,9 @@ const StyledAppBar = styled.div`
   && {
     width: 100%;
     padding: 0;
-    
+    display:grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 `;
 
