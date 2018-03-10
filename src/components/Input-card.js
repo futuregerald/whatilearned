@@ -22,6 +22,7 @@ const StyledButton = styled(Button)`
     width: 2.2rem
     background-color: transparent;
     box-shadow: 0 0 transparent
+    border-radius: 5px 5px 5px 5px;
   }
 `;
 
