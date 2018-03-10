@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'typeface-roboto';
 import { TextField, Card, CardContent, Button } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
@@ -15,15 +16,19 @@ const StyledCard = styled(Card)`
 
 const StyledButton = styled(Button)`
   && {
-    top: 3rem
+    top: 0.5rem
+    left: 1rem
     height: 1rem
     width: 2.2rem
+    background-color: transparent;
+    box-shadow: 0 0 transparent
+    border-radius: 5px 5px 5px 5px;
   }
 `;
 
 const StyledCardContent = styled(CardContent)`
   display: grid;
-  grid-template-columns: 15fr 10fr 1fr;
+  grid-template-columns: 15fr 10fr 5px;
   width: 100%;
   grid-gap: 20px;
   @media (max-width: 700px) {
@@ -55,7 +60,11 @@ const InputCard = ({ id, lesson, from, onChange, lessonPlaceholder, fromPlacehol
         </StyledCardContent>
       </StyledCard>
     );
-  
+
+}
+
+InputCard.propTypes = {
+  id: PropTypes.array
 }
 
 export default InputCard;
