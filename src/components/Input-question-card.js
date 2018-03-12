@@ -28,7 +28,7 @@ const StyledButton = styled(Button)`
 
 const StyledCardContent = styled(CardContent)`
   display: grid;
-  grid-template-columns: 15fr 10fr 5px;
+  grid-template-columns: 1fr 5px;
   width: 100%;
   grid-gap: 20px;
   @media (max-width: 700px) {
@@ -36,7 +36,7 @@ const StyledCardContent = styled(CardContent)`
   }
 `;
 
-const InputCard = ({ id, lesson, from, onChange, lessonPlaceholder, fromPlaceholder, deleteB, deleteHandler})=> {
+const InputQuestionCard = ({ id, question, onChangeQuestion, questionPlaceholder, deleteB, deleteHandler})=> {
   const deleteButton =() =>{
     if (deleteHandler){
       return (
@@ -54,8 +54,8 @@ const InputCard = ({ id, lesson, from, onChange, lessonPlaceholder, fromPlacehol
     return (
         <StyledCard>
         <StyledCardContent>
-          <TextField name="lesson" label="I learned..." value={lesson} helperText={lessonPlaceholder} fullWidth onChange={onChange.bind(this,id)} />
-          <TextField name="from" fullWidth id="1" label="From..." value={from} helperText={fromPlaceholder} onChange={onChange.bind(this,id)} />
+          <TextField name="question" label="I'm curious about..." value={question} helperText={questionPlaceholder} fullWidth onChange={onChangeQuestion.bind(this,id)} />
+        
           {deleteB && deleteButton()}
         </StyledCardContent>
       </StyledCard>
@@ -63,8 +63,8 @@ const InputCard = ({ id, lesson, from, onChange, lessonPlaceholder, fromPlacehol
 
 }
 
-InputCard.propTypes = {
-  id: PropTypes.array
+InputQuestionCard.propTypes = {
+  id: PropTypes.string
 }
 
-export default InputCard;
+export default InputQuestionCard;

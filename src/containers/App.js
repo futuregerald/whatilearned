@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
-import { Card, CardContent, Toolbar, Typography, Button } from 'material-ui';
-import Animate from 'react-simple-animate';
-import AddIcon from 'material-ui-icons/Add';
+import { Toolbar } from 'material-ui';
 import styled , {injectGlobal} from 'styled-components';
-import InputCard from '../components/Input-card'
+import InputLearnedCard from '../components/Input-learned-card'
+import InputQuestionCard from '../components/Input-question-card'
+import HeadingH3Add from '../components/Heading-h3-add'
 
 import logo from '../images/logo2.svg'
 
@@ -40,23 +40,6 @@ const CenterContainer = styled.div`
   }
 `;
 
-const StyledCardHeader = styled(Card)`
-  && {
-    display: grid;
-    grid-template-columns: 0.9fr;
-    width: 100%;
-    background-color: #1565c0;
-  }
-`;
-
-const StyledButton = styled(Button)`
-  && {
-    background-color: #E34304;
-    justify-self: end
-    top: 3rem
-  }
-`;
-
 const StyledAppBar = styled.div`
   && {
     width: 100%;
@@ -65,20 +48,6 @@ const StyledAppBar = styled.div`
     grid-template-columns: 1fr;
     justify-items: center;
   }
-`;
-
-const StyledCardContent = styled(CardContent)`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  grid-gap: 20px;
-  @media (max-width: 700px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const H3 = styled.h3`
-  color: white;
 `;
 
 const StyledLogo = styled.img`
@@ -97,16 +66,21 @@ class App extends Component {
           lesson: "",
           from: "",
         }
+      },
+      questions: {
+        1 : {
+          id: 1,
+          question: "",
+        }
       }
       
     };
   }
    onClickAddLesson = ()=>{
-      let unique = true
       let elements = Object.keys(this.state.checkins)
       elements.sort((a, b)=>{return a - b});
       console.log(elements)
-      const newElement = parseInt(elements[elements.length-1])
+      const newElement = parseInt(elements[elements.length-1],10)
       console.log(newElement)
        this.setState({checkins: {...this.state.checkins,[newElement+1]: {
         id: newElement+1,
@@ -115,6 +89,19 @@ class App extends Component {
       }
     }})
   }
+
+  onClickAddQuestion = ()=>{
+    let elements = Object.keys(this.state.questions)
+    elements.sort((a, b)=>{return a - b});
+    console.log(elements)
+    const newElement = parseInt(elements[elements.length-1],10)
+    console.log(newElement)
+     this.setState({questions: {...this.state.questions,[newElement+1]: {
+      id: newElement+1,
+      question: "",
+    }
+  }})
+}
   
 
   lessonOnChangeHandler = (id,e)=>{
@@ -127,6 +114,12 @@ class App extends Component {
      }
   }
 
+  questionOnChangeHandler = (id,e)=>{
+
+    const {question} = this.state.questions[id]
+      return this.setState({questions: {...this.state.questions, [id]: {question: e.target.value}}})
+  }
+
   lessonOnDeleteHandler = (id,e)=>{
     console.log(id)
     console.log(e)
@@ -134,14 +127,22 @@ class App extends Component {
     delete newState[id]
     return this.setState({checkins:newState})
   }
+
+  questionOnDeleteHandler = (id,e)=>{
+    console.log(id)
+    console.log(e)
+    let newState = {...this.state.questions}
+    delete newState[id]
+    return this.setState({questions:newState})
+  }
   
   render() {
 
-    const inputs = Object.keys(this.state.checkins).map((k)=>{
+    const lessonInputs = Object.keys(this.state.checkins).map((k)=>{
       
       const c = this.state.checkins[k]
       if (c.id === 1){
-        return <InputCard 
+        return <InputLearnedCard 
           key={k} 
           lesson={c.lesson} 
           from={c.from} 
@@ -152,11 +153,25 @@ class App extends Component {
           
           />
       } else {
-      return <InputCard key={k} lesson={c.lesson} from={c.from} id={k} onChange={this.lessonOnChangeHandler} deleteB={true} deleteHandler={this.lessonOnDeleteHandler}/>
+      return <InputLearnedCard key={k} lesson={c.lesson} from={c.from} id={k} onChange={this.lessonOnChangeHandler} deleteB={true} deleteHandler={this.lessonOnDeleteHandler}/>
       }
     })
 
-    
+    const questionInputs = Object.keys(this.state.questions).map((k)=>{
+      
+      const c = this.state.questions[k]
+      if (c.id === 1){
+        return <InputQuestionCard 
+          key={k} 
+          question={c.question} 
+          id={k} 
+          onChangeQuestion={this.questionOnChangeHandler} 
+          questionPlaceholder={"Example: What is the React Context API!?"}
+          />
+      } else {
+      return <InputQuestionCard key={k} question={c.question} id={k} onChangeQuestion={this.questionOnChangeHandler} deleteB={true} deleteHandler={this.questionOnDeleteHandler}/>
+      }
+    })
 
     return (
       <OuterBody>
@@ -170,15 +185,11 @@ class App extends Component {
         <BodyContainer>
           <div />
           <CenterContainer>
-            <StyledCardHeader>
-              <StyledCardContent>
-                <H3>Today...</H3>
-                <StyledButton variant="fab" aria-label="add" onClick={this.onClickAddLesson.bind(this)}>
-                 <AddIcon />
-                </StyledButton>
-              </StyledCardContent>
-            </StyledCardHeader>
-            {inputs}
+            <HeadingH3Add Title="Today..." onClickHandler={this.onClickAddLesson}/>
+            {lessonInputs}
+            <br />
+            <HeadingH3Add Title="I have questions about..." onClickHandler={this.onClickAddQuestion}/>
+            {questionInputs}
           </CenterContainer>
           <div />
         </BodyContainer>
