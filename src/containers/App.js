@@ -4,6 +4,7 @@ import { Toolbar, IconButton } from 'material-ui';
 import AccountCircle from 'material-ui-icons/AccountCircle';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import styled, { injectGlobal } from 'styled-components';
+import gravatar from 'gravatar-api';
 import InputLearnedCard from '../components/Input-learned-card';
 import InputQuestionCard from '../components/Input-question-card';
 import HeadingH3Add from '../components/Heading-h3-add';
@@ -11,6 +12,7 @@ import HeadingH3Add from '../components/Heading-h3-add';
 import logo from '../images/logo2.svg';
 
 injectGlobal`
+
   body {
     background-color: #BDC3E7;
   }
@@ -125,6 +127,14 @@ class App extends Component {
     });
   };
 
+  lessonOnChangeHandler = (id, e) => {
+    const { from, lesson } = this.state.checkins[id];
+    if (e.target.name === 'lesson') {
+      return this.setState({ checkins: { ...this.state.checkins, [id]: { lesson: e.target.value, from } } });
+    }
+    return this.setState({ checkins: { ...this.state.checkins, [id]: { from: e.target.value, lesson } } });
+  };
+
   questionOnChangeHandler = (id, e) =>
     this.setState({ questions: { ...this.state.questions, [id]: { question: e.target.value } } });
 
@@ -143,14 +153,13 @@ class App extends Component {
     delete newState[id];
     return this.setState({ questions: newState });
   };
-  /*
+
   getGravatarUrl = email => {
     const options = {
       email,
     };
     return gravatar.imageURL(options);
   };
-  */
   handleChange = (event, checked) => {
     this.setState({ auth: checked });
   };
