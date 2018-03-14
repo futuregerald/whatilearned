@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import 'typeface-roboto';
-import { Toolbar, IconButton } from 'material-ui';
-import AccountCircle from 'material-ui-icons/AccountCircle';
-import Menu, { MenuItem } from 'material-ui/Menu';
 import styled, { injectGlobal } from 'styled-components';
 import gravatar from 'gravatar-api';
 import InputLearnedCard from '../components/Input-learned-card';
 import InputQuestionCard from '../components/Input-question-card';
 import HeadingH3Add from '../components/Heading-h3-add';
-
-import logo from '../images/logo2.svg';
+import Header from '../components/Header';
 
 injectGlobal`
 
@@ -42,34 +38,6 @@ const CenterContainer = styled.div`
   }
 `;
 
-const StyledAppBar = styled.div`
-  && {
-    width: 100%;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr 5px;
-    justify-items: center;
-  }
-`;
-
-const StyledLogo = styled.img`
-  width: 20rem;
-`;
-
-const StyledToolbar = styled(Toolbar)`
-&& {
-  display:grid;
-  grid-template-columns: 1fr 5px;
-  border: "solid red 2px"
-  width: 100%
-}
-`;
-
-const StyledMenuDivArea = styled.div`
-  top: 5rem
-  justify-self: end
-
-`;
 
 class App extends Component {
   constructor() {
@@ -173,8 +141,6 @@ class App extends Component {
   };
 
   render() {
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
 
     const lessonInputs = Object.keys(this.state.checkins).map(k => {
       const c = this.state.checkins[k];
@@ -232,40 +198,7 @@ class App extends Component {
     return (
       <OuterBody>
         {console.log(this.state)}
-        <StyledAppBar>
-          <StyledToolbar>
-            <StyledLogo src={logo} alt="WhatILearned.com logo" />
-          </StyledToolbar>
-          {/* This is the avatar menu */}
-          <StyledMenuDivArea>
-            <IconButton
-              aria-owns={open ? 'menu-appbar' : null}
-              aria-haspopup="true"
-              onClick={this.handleMenu}
-              color="inherit"
-              size="large"
-            >
-              <AccountCircle />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={open}
-              onClose={this.handleClose}
-            >
-              <MenuItem onClick={this.handleClose}>Sign In</MenuItem>
-            </Menu>
-          </StyledMenuDivArea>
-          {/* This is the end of the avatar menu */}
-        </StyledAppBar>
+        <Header />
         <BodyContainer>
           <div />
           <CenterContainer>

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'typeface-roboto';
 import { TextField, Card, CardContent, Button } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
 import styled from 'styled-components';
