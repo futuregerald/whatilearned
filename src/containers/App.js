@@ -203,7 +203,9 @@ class App extends Component {
           <div />
           <CenterContainer>
             <HeadingH3Add Title="Today..." onClickHandler={this.onClickAddLesson} />
-            {lessonInputs}
+            
+          {lessonInputs}
+        
             <br />
             <HeadingH3Add Title="I have questions about..." onClickHandler={this.onClickAddQuestion} />
             {questionInputs}

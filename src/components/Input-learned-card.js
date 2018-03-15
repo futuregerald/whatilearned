@@ -63,7 +63,14 @@ const InputLearnedCard = ({ id, lesson, from, onChange, lessonPlaceholder, fromP
 }
 
 InputLearnedCard.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.string,
+  lesson: PropTypes.string, 
+  from: PropTypes.string, 
+  onChange: PropTypes.func, 
+  lessonPlaceholder: PropTypes.string, 
+  fromPlaceholder: PropTypes.string, 
+  deleteB: PropTypes.bool, 
+  deleteHandler: PropTypes.func
 }
 
 export default InputLearnedCard;

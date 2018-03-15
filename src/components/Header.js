@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Toolbar, IconButton } from 'material-ui';
-import AccountCircle from 'material-ui-icons/AccountCircle';
 import Menu, { MenuItem } from 'material-ui/Menu';
+import MenuIcon from 'material-ui-icons/Menu';
+import Modal from 'material-ui/Modal';
 import styled from 'styled-components';
 
 import logo from '../images/logo2.svg';
@@ -30,9 +31,32 @@ const StyledLogo = styled.img`
   `;
 
 const StyledMenuDivArea = styled.div`
+&& {
   top: 5rem
   justify-self: end
-
+  background-color: "black"
+}
+`;
+const StyledModalFull = styled.div`
+  border: 0
+  background-color: #BDC2E6;
+  width: 50%
+  height: 50%
+  position: absolute
+  left: 25%
+  top: 25%
+  box-shadow: 0 0 transparent
+  
+  @media (max-width: 1100px) {
+    width: 80%
+    left: 10%
+    top: 10rem
+  }
+  @media (max-width: 700px) {
+    width: 100%
+    left: 0
+    top: 10rem
+  }
 `;
 
 class Header extends Component {
@@ -41,6 +65,7 @@ class Header extends Component {
     this.state = {
       loggedIn: false,
       anchorEl: null,
+      modal: false,
     };
   }
   handleChange = (event, checked) => {
@@ -52,7 +77,7 @@ class Header extends Component {
   };
 
   handleClose = () => {
-    this.setState({ anchorEl: null });
+    this.setState({ anchorEl: null,modal: !this.state.modal });
   };
 
   render() {
@@ -72,8 +97,9 @@ class Header extends Component {
           onClick={this.handleMenu}
           color="inherit"
           size="large"
+          style={{top:15}}
         >
-          <AccountCircle />
+          <MenuIcon style={{fontSize: '2em'}}/>
         </IconButton>
         <Menu
           id="menu-appbar"
@@ -88,11 +114,20 @@ class Header extends Component {
           }}
           open={open}
           onClose={this.handleClose}
+          
         >
           <MenuItem onClick={this.handleClose}>Sign In</MenuItem>
         </Menu>
       </StyledMenuDivArea>
       {/* This is the end of the avatar menu */}
+      <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.modal}
+          onClose={this.handleClose}
+        >
+        <StyledModalFull><h1>hey tis is a modal</h1></StyledModalFull>
+      </Modal>
     </StyledAppBar>
     );
   }
