@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'typeface-roboto';
 import { Card, CardContent, Button } from 'material-ui';
 import AddIcon from 'material-ui-icons/Add';
@@ -52,6 +53,11 @@ const HeadingH3Add = ({Title, onClickHandler})=> {
            
     );
 
+}
+
+HeadingH3Add.propTypes = {
+  Title: PropTypes.string.isRequired,
+  onClickHandler: PropTypes.func.isRequired, 
 }
 
 export default HeadingH3Add;

@@ -64,7 +64,12 @@ const InputQuestionCard = ({ id, question, onChangeQuestion, questionPlaceholder
 }
 
 InputQuestionCard.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.string.isRequired,
+  question: PropTypes.string.isRequired, 
+  onChangeQuestion: PropTypes.func.isRequired, 
+  questionPlaceholder: PropTypes.string, 
+  deleteB: PropTypes.bool, 
+  deleteHandler: PropTypes.func
 }
 
 export default InputQuestionCard;
