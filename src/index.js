@@ -8,8 +8,8 @@ import {
 
   const PrimaryRoute = ()=>(
     <Router>
-      <Route exact path="/" component={App}/>
-  </Router>
+      <Route exact path="/" component={App}/> 
+    </Router>
   )
 
 ReactDOM.render(<PrimaryRoute />, document.getElementById('root'));

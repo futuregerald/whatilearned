@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'typeface-roboto';
 import { TextField, Card, CardContent, Button } from 'material-ui';
 import DeleteIcon from 'material-ui-icons/Delete';
 import styled from 'styled-components';
@@ -64,7 +63,14 @@ const InputLearnedCard = ({ id, lesson, from, onChange, lessonPlaceholder, fromP
 }
 
 InputLearnedCard.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.string.isRequired,
+  lesson: PropTypes.string.isRequired, 
+  from: PropTypes.string.isRequired, 
+  onChange: PropTypes.func.isRequired, 
+  lessonPlaceholder: PropTypes.string, 
+  fromPlaceholder: PropTypes.string, 
+  deleteB: PropTypes.bool, 
+  deleteHandler: PropTypes.func
 }
 
 export default InputLearnedCard;
