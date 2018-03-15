@@ -43,17 +43,20 @@ const StyledModalFull = styled.div`
   width: 50%
   height: 50%
   position: absolute
-  left: 25%
-  top: 25%
-  box-shadow: 0 0 transparent
+  top: 10rem
+  left: 0;
+  right: 0;
+  margin: auto;
+  box-shadow: 0 0 transparent !important
+  max-width: 40rem;
+  max-height: 30rem;
   
   @media (max-width: 1100px) {
-    width: 80%
-    left: 10%
+    width: 80% !important
     top: 10rem
   }
   @media (max-width: 700px) {
-    width: 100%
+    min-width: 100%
     left: 0
     top: 10rem
   }
@@ -126,7 +129,7 @@ class Header extends Component {
           open={this.state.modal}
           onClose={this.handleClose}
         >
-        <StyledModalFull><h1>hey tis is a modal</h1></StyledModalFull>
+        <StyledModalFull><h1>Hey this is the login modal. I'm going to add fun login stuff here.</h1></StyledModalFull>
       </Modal>
     </StyledAppBar>
     );
