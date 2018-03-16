@@ -62,6 +62,14 @@ const StyledModalFull = styled.div`
   }
 `;
 
+const TopBar = styled.div`
+  position: absolute
+  width: 100%
+  height: 6rem
+  background-color: white
+  top: 0
+`;
+
 class Header extends Component {
   constructor() {
     super();
@@ -89,6 +97,8 @@ class Header extends Component {
 
     return (
       <StyledAppBar>
+      <TopBar>
+      </TopBar>
       <StyledToolbar>
         <StyledLogo src={logo} alt="WhatILearned.com logo" />
       </StyledToolbar>

@@ -19,6 +19,7 @@ const OuterBody = styled.div`
 `;
 
 const BodyContainer = styled.div`
+  margin-top: 3rem !important
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
