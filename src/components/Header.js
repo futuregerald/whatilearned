@@ -66,8 +66,9 @@ const TopBar = styled.div`
   position: absolute
   width: 100%
   height: 6rem
-  background-color: white
+  background-color: #1565c0
   top: 0
+  left: 0
 `;
 
 class Header extends Component {
