@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
-import { Toolbar, IconButton } from 'material-ui';
+import { Toolbar, IconButton, TextField } from 'material-ui';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import MenuIcon from 'material-ui-icons/Menu';
+import AccountCircle from 'material-ui-icons/AccountCircle';
 import Modal from 'material-ui/Modal';
+import AppBar from 'material-ui/AppBar';
+import Tabs, { Tab } from 'material-ui/Tabs';
+import Typography from 'material-ui/Typography';
 import styled from 'styled-components';
 
 import logo from '../images/logo2.svg';
+
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
 
 const StyledAppBar = styled.div`
   && {
@@ -38,8 +50,10 @@ const StyledMenuDivArea = styled.div`
 }
 `;
 const StyledModalFull = styled.div`
+  border-radius: 5px
+  outline: none;
   border: 0
-  background-color: #BDC2E6;
+  background-color: white;
   width: 50%
   height: 50%
   position: absolute
@@ -48,7 +62,7 @@ const StyledModalFull = styled.div`
   right: 0;
   margin: auto;
   box-shadow: 0 0 transparent !important
-  max-width: 40rem;
+  max-width: 35rem;
   max-height: 30rem;
   
   @media (max-width: 1100px) {
@@ -78,6 +92,7 @@ class Header extends Component {
       loggedIn: false,
       anchorEl: null,
       modal: false,
+      loginValue: 1
     };
   }
   handleChange = (event, checked) => {
@@ -89,11 +104,21 @@ class Header extends Component {
   };
 
   handleClose = () => {
-    this.setState({ anchorEl: null,modal: !this.state.modal });
+    this.setState({ anchorEl: null});
+  };
+
+  openModal = () => {
+    this.setState({ modal: true });
+  };
+  closeModal = () => {
+    this.setState({ anchorEl: null,modal: false });
+  };
+  handleSignInModalChange = (event, value) => {
+    this.setState({ loginValue: value });
   };
 
   render() {
-    const { anchorEl } = this.state;
+    const { anchorEl, loginValue } = this.state;
     const open = Boolean(anchorEl);
 
     return (
@@ -113,7 +138,7 @@ class Header extends Component {
           size="large"
           style={{top:15}}
         >
-          <MenuIcon style={{fontSize: '2em'}}/>
+          <AccountCircle style={{fontSize: '2em'}}/>
         </IconButton>
         <Menu
           id="menu-appbar"
@@ -127,10 +152,10 @@ class Header extends Component {
             horizontal: 'right',
           }}
           open={open}
-          onClose={this.handleClose}
+          onClose={this.closeModal}
           
         >
-          <MenuItem onClick={this.handleClose}>Sign In</MenuItem>
+          <MenuItem onClick={this.openModal}>Sign In</MenuItem>
         </Menu>
       </StyledMenuDivArea>
       {/* This is the end of the avatar menu */}
@@ -138,9 +163,26 @@ class Header extends Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.modal}
-          onClose={this.handleClose}
+          onClose={this.closemOdal}
+          onBackdropClick={this.closeModal}
         >
-        <StyledModalFull><h1>Hey this is the login modal. I'm going to add fun login stuff here.</h1></StyledModalFull>
+        <StyledModalFull>
+          <AppBar position="static">
+          <Tabs value={loginValue} centered onChange={this.handleSignInModalChange}>
+            <Tab label="Sign in" />
+            <Tab label="New Account" />
+          </Tabs>
+        </AppBar>
+        {loginValue === 0 && <TabContainer>
+          <TextField
+          id="search"
+          label="e-mail address"
+          type="email"
+          margin="normal"
+        />
+          </TabContainer>}
+        {loginValue === 1 && <TabContainer>Item Two</TabContainer>}
+        </StyledModalFull>
       </Modal>
     </StyledAppBar>
     );
